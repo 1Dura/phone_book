@@ -13,4 +13,6 @@ public:
   person(std::string fName, std::string sName, long long pNumber);
   std::string getFirstName() { return firstName; }
   std::string getSecondName() { return secondName; }
+  long long getPhoneNumber() { return phoneNumber; }
+  void print();
 };
