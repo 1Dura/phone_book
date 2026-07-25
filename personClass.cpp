@@ -1,28 +1,13 @@
-#include "personClass.hpp"
+#include "PersonClass.hpp"
 
-person::person() {
-  this->firstName = "None";
-  this->secondName = "None";
-  this->phoneNumber = -1;
-  // std::cout << "Added empty person!\n";
-}
-person::person(std::string fName, std::string sName) {
-  this->firstName = fName;
-  this->secondName = sName;
-  this->phoneNumber = -1;
-  std::cout << "Added person " << fName << " " << sName
-            << " without phone number!\n";
-}
+Person::Person() : firstName("None"), secondName("None"), phoneNumber(-1) {}
+Person::Person(const std::string &fName, const std::string &sName)
+    : firstName(fName), secondName(sName), phoneNumber(-1) {}
 
-person::person(std::string fName, std::string sName, long long pNumber) {
-  this->firstName = fName;
-  this->secondName = sName;
-  this->phoneNumber = pNumber;
-  std::cout << "Added person " << fName << " " << sName << " with phone number "
-            << pNumber << '\n';
-}
+Person::Person(const std::string &fName, const std::string &sName,
+               long long pNumber)
+    : firstName(fName), secondName(sName), phoneNumber(pNumber) {}
 
-void person::print() {
-  std::cout << this->firstName << " " << this->secondName << " "
-            << this->phoneNumber << '\n';
+void Person::print() const {
+  std::cout << firstName << " " << secondName << " " << phoneNumber << '\n';
 }

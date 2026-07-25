@@ -1,9 +1,9 @@
-#include "personClass.hpp"
+#include "PersonClass.hpp"
 #include <iostream>
 #include <list>
 #include <string>
 
-person createRow() {
+Person createPerson() {
   std::string fName;
   std::string sName;
   long long pNumber = -1;
@@ -13,37 +13,41 @@ person createRow() {
   std::cin >> sName;
   std::cout << "Enter phone number: ";
   std::cin >> pNumber;
-  return person(fName, sName, pNumber);
+  return Person(fName, sName, pNumber);
 }
 
 int main() {
   const std::string welcomeText = "Welcome to phone book! \nUse can use "
                                   "commands:\n/show\n/add\n/remove\n/exit\n";
-  std::list<person> book;
-  book.push_back(person("John", "Smith", 8043803235));
-  book.push_back(person("Bob", "Doll", 8043803235));
-  book.push_back(person("Sam", "Lol", 8043803235));
+  std::list<Person> book;
+  book.push_back(Person("John", "Smith", 8043803235));
+  book.push_back(Person("Bob", "Doll", 8043803235));
+  book.push_back(Person("Sam", "Lol", 8043803235));
   while (true) {
     std::cout << welcomeText;
     std::string command;
     std::cin >> command;
     if (command == "/show") {
       int i = 0;
-      for (auto row : book) {
+      for (const auto &row : book) {
         std::cout << i << " -> ";
         row.print();
         ++i;
       }
     } else if (command == "/add") {
-      book.push_back(createRow());
+      book.push_back(createPerson());
     } else if (command == "/exit") {
       break;
     } else if (command == "/remove") {
       size_t id;
       std::cout << "Enter id you want remove: ";
       std::cin >> id;
-      auto iter = std::next(book.begin(), id);
-      book.erase(iter);
+      if (id >= book.size()) {
+        std::cout << "Error! wrong id!\n";
+      } else {
+        auto iter = std::next(book.begin(), id);
+        book.erase(iter);
+      }
     }
   }
 }
